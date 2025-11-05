@@ -306,9 +306,10 @@ This project is for educational purposes as part of DBMS Mini Project (UE23CS351
 
 ## Contributors
 
-[Add your team member names and IDs here]
+[]
 
 ## Acknowledgments
 
 - PESU Faculty for project guidance
+
 - Flask and MySQL communities for excellent documentation

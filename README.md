@@ -212,20 +212,6 @@ The database includes triggers for:
 - Validating business rules
 - Maintaining data integrity
 
-## Screenshots for Documentation
-
-When documenting your project, capture screenshots of:
-1. Dashboard with statistics
-2. Artist listing page
-3. Add/Edit artist form
-4. Artwork listing with search
-5. Auction cards view
-6. Auction detail page with bidding modal
-7. Bid placement confirmation
-8. Buyer purchase history
-9. Exhibition listing
-10. Reports page with analytics
-
 ## API Endpoints
 
 The application includes a REST API endpoint:
@@ -261,44 +247,6 @@ curl http://localhost:5000/api/artworks
    - Check bid amount >= artwork price
    - Verify auction status is "Upcoming"
 
-## For Your DBMS Project Report
-
-### Include These Sections:
-
-1. **User Requirement Specification**
-   - Purpose: Manage art gallery operations including auctions
-   - Scope: CRUD operations, auction system, reporting
-   - Detailed description with entities
-
-2. **ER Diagram**
-   - Create using the database schema
-   - Show all entities and relationships
-
-3. **Relational Schema**
-   - Normalize to 3NF
-   - Document all tables with attributes
-
-4. **DDL Commands**
-   - CREATE TABLE statements (from dump file)
-   - ALTER TABLE for constraints
-
-5. **CRUD Screenshots**
-   - All add/edit/delete operations
-   - Include success/error messages
-
-6. **Stored Procedures/Functions**
-   - place_bid implementation
-   - finalize_auction logic
-   - Include code snippets
-
-7. **Complex Queries**
-   - View definitions
-   - Join operations
-   - Aggregate queries
-
-8. **Frontend Screenshots**
-   - All pages showing functionality
-   - Responsive design on different screens
 
 ## License
 
@@ -313,3 +261,4 @@ This project is for educational purposes as part of DBMS Mini Project (UE23CS351
 - PESU Faculty for project guidance
 
 - Flask and MySQL communities for excellent documentation
+

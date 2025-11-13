@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block title %}Buyers - Art Gallery{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1 class="page-title">
+        <i class="fas fa-users"></i> Buyers
+    </h1>
+    <a href="{{ url_for('add_buyer') }}" class="btn btn-primary">
+        <i class="fas fa-plus"></i> Add Buyer
+    </a>
+</div>
+
+<div class="table-container">
+    <table class="data-table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Total Bids</th>
+                <th>Winning Bids</th>
+                <th>Total Spent</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% if buyers %}
+                {% for buyer in buyers %}
+                <tr>
+                    <td>{{ buyer.buyer_id }}</td>
+                    <td><strong>{{ buyer.Name }}</strong></td>
+                    <td>{{ buyer.email }}</td>
+                    <td>{{ buyer.total_bids or 0 }}</td>
+                    <td>
+                        <span class="badge badge-success">{{ buyer.winning_bids or 0 }}</span>
+                    </td>
+                    <td class="price">${{ "{:,.2f}".format(buyer.total_spent) if buyer.total_spent else '0.00' }}</td>
+                </tr>
+                {% endfor %}
+            {% else %}
+                <tr>
+                    <td colspan="6" class="no-data">No buyers found. <a href="{{ url_for('add_buyer') }}">Add your first buyer</a></td>
+                </tr>
+            {% endif %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

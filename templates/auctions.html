@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+
+{% block title %}Auctions - Art Gallery{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1 class="page-title">
+        <i class="fas fa-gavel"></i> Auctions
+    </h1>
+    <a href="{{ url_for('add_auction') }}" class="btn btn-primary">
+        <i class="fas fa-plus"></i> Create Auction
+    </a>
+</div>
+
+<div class="auction-grid">
+    {% if auctions %}
+        {% for auction in auctions %}
+        <div class="auction-card">
+            <div class="auction-header">
+                <h3>Auction #{{ auction.auction_id }}</h3>
+                <span class="status-badge status-{{ auction.status|lower }}">{{ auction.status }}</span>
+            </div>
+            <div class="auction-body">
+                <div class="auction-info">
+                    <p><i class="fas fa-calendar"></i> <strong>Date:</strong> {{ auction.auction_date }}</p>
+                    <p><i class="fas fa-map-marker-alt"></i> <strong>Location:</strong> {{ auction.location }}</p>
+                </div>
+                <div class="auction-stats">
+                    <div class="stat-item">
+                        <span class="stat-value">{{ auction.artworks_in_auction or 0 }}</span>
+                        <span class="stat-label">Artworks</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-value">{{ auction.total_bids or 0 }}</span>
+                        <span class="stat-label">Bids</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-value">${{ "{:,.0f}".format(auction.max_bid_amount) if auction.max_bid_amount else '0' }}</span>
+                        <span class="stat-label">Max Bid</span>
+                    </div>
+                </div>
+            </div>
+            <div class="auction-actions">
+                <a href="{{ url_for('auction_detail', auction_id=auction.auction_id) }}" class="btn btn-sm btn-primary">
+                    <i class="fas fa-eye"></i> View Details
+                </a>
+                {% if auction.status == 'Upcoming' %}
+                <form action="{{ url_for('finalize_auction', auction_id=auction.auction_id) }}" method="POST" style="display:inline;" onsubmit="return confirm('Are you sure you want to finalize this auction?');">
+                    <button type="submit" class="btn btn-sm btn-success">
+                        <i class="fas fa-check"></i> Finalize
+                    </button>
+                </form>
+                {% endif %}
+            </div>
+        </div>
+        {% endfor %}
+    {% else %}
+        <div class="no-data-large">
+            <i class="fas fa-gavel"></i>
+            <h3>No Auctions Found</h3>
+            <p>Create your first auction to get started</p>
+            <a href="{{ url_for('add_auction') }}" class="btn btn-primary">
+                <i class="fas fa-plus"></i> Create Auction
+            </a>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

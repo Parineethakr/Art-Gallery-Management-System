@@ -1,0 +1,180 @@
+{% extends "base.html" %}
+
+{% block title %}Auction Details - Art Gallery{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1 class="page-title">
+        <i class="fas fa-gavel"></i> Auction #{{ auction.auction_id if auction else 'Not Found' }}
+    </h1>
+    <div>
+        <a href="{{ url_for('auctions') }}" class="btn btn-secondary">
+            <i class="fas fa-arrow-left"></i> Back to Auctions
+        </a>
+        {% if auction and auction.status == 'Upcoming' %}
+        <form action="{{ url_for('finalize_auction', auction_id=auction.auction_id) }}" method="POST" style="display:inline;" onsubmit="return confirm('Are you sure you want to finalize this auction?');">
+            <button type="submit" class="btn btn-success">
+                <i class="fas fa-check"></i> Finalize Auction
+            </button>
+        </form>
+        {% endif %}
+    </div>
+</div>
+
+{% if auction %}
+<div class="auction-detail-container">
+    <div class="auction-info-card">
+        <h2><i class="fas fa-info-circle"></i> Auction Information</h2>
+        <div class="info-grid">
+            <div class="info-item">
+                <label>Date:</label>
+                <span>{{ auction.auction_date }}</span>
+            </div>
+            <div class="info-item">
+                <label>Location:</label>
+                <span>{{ auction.location }}</span>
+            </div>
+            <div class="info-item">
+                <label>Status:</label>
+                <span class="status-badge status-{{ auction.status|lower }}">{{ auction.status }}</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2><i class="fas fa-image"></i> Artworks in this Auction</h2>
+        {% if artworks %}
+        <div class="artworks-grid">
+            {% for artwork in artworks %}
+            <div class="artwork-card">
+                <div class="artwork-header">
+                    <h4>{{ artwork.Title }}</h4>
+                    <span class="price">${{ "{:,.2f}".format(artwork.price) }}</span>
+                </div>
+                <div class="artwork-details">
+                    <p><strong>Artist:</strong> {{ artwork.artist_name }}</p>
+                    <p><strong>Type:</strong> {{ artwork.Type }}</p>
+                    <p><strong>Year:</strong> {{ artwork.creation_yr }}</p>
+                </div>
+                {% if auction.status == 'Upcoming' %}
+                <button class="btn btn-sm btn-primary" onclick="openBidModal({{ artwork.artwork_id }}, '{{ artwork.Title }}', {{ artwork.price }})">
+                    <i class="fas fa-gavel"></i> Place Bid
+                </button>
+                {% endif %}
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <p class="no-data">No artworks in this auction yet.</p>
+        {% endif %}
+    </div>
+
+    <div class="section">
+        <h2><i class="fas fa-list"></i> Bids</h2>
+        {% if bids %}
+        <div class="table-container">
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Bid ID</th>
+                        <th>Buyer</th>
+                        <th>Artwork</th>
+                        <th>Bid Amount</th>
+                        <th>Timestamp</th>
+                        <th>Winner</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for bid in bids %}
+                    <tr>
+                        <td>{{ bid.bid_id }}</td>
+                        <td>{{ bid.buyer_name }}</td>
+                        <td>{{ bid.artwork_title }}</td>
+                        <td class="price">${{ "{:,.2f}".format(bid.bid_amount) }}</td>
+                        <td>{{ bid.bid_timestamp }}</td>
+                        <td>
+                            {% if bid.is_winner %}
+                            <span class="badge badge-success"><i class="fas fa-trophy"></i> Winner</span>
+                            {% else %}
+                            <span class="badge badge-secondary">-</span>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% else %}
+        <p class="no-data">No bids placed yet.</p>
+        {% endif %}
+    </div>
+</div>
+
+<!-- Bid Modal -->
+<div id="bidModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3><i class="fas fa-gavel"></i> Place a Bid</h3>
+            <span class="close" onclick="closeBidModal()">&times;</span>
+        </div>
+        <form action="{{ url_for('place_bid') }}" method="POST">
+            <input type="hidden" name="auction_id" value="{{ auction.auction_id }}">
+            <input type="hidden" name="artwork_id" id="modal_artwork_id">
+            
+            <div class="modal-body">
+                <p><strong>Artwork:</strong> <span id="modal_artwork_title"></span></p>
+                <p><strong>Minimum Bid:</strong> $<span id="modal_min_bid"></span></p>
+                
+                <div class="form-group">
+                    <label for="buyer_id">Buyer ID *</label>
+                    <input type="number" id="buyer_id" name="buyer_id" required>
+                    <small>Enter your buyer ID</small>
+                </div>
+                
+                <div class="form-group">
+                    <label for="bid_amount">Bid Amount ($) *</label>
+                    <input type="number" id="bid_amount" name="bid_amount" step="0.01" required>
+                    <small>Must be greater than or equal to the minimum bid</small>
+                </div>
+            </div>
+            
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-gavel"></i> Place Bid
+                </button>
+                <button type="button" class="btn btn-secondary" onclick="closeBidModal()">Cancel</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% else %}
+<div class="no-data-large">
+    <i class="fas fa-exclamation-circle"></i>
+    <h3>Auction Not Found</h3>
+    <p>The requested auction could not be found.</p>
+</div>
+{% endif %}
+{% endblock %}
+
+{% block extra_js %}
+<script>
+function openBidModal(artworkId, artworkTitle, minBid) {
+    document.getElementById('modal_artwork_id').value = artworkId;
+    document.getElementById('modal_artwork_title').textContent = artworkTitle;
+    document.getElementById('modal_min_bid').textContent = minBid.toFixed(2);
+    document.getElementById('bid_amount').min = minBid;
+    document.getElementById('bidModal').style.display = 'block';
+}
+
+function closeBidModal() {
+    document.getElementById('bidModal').style.display = 'none';
+}
+
+window.onclick = function(event) {
+    const modal = document.getElementById('bidModal');
+    if (event.target == modal) {
+        closeBidModal();
+    }
+}
+</script>
+{% endblock %}

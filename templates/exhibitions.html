@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block title %}Exhibitions - Art Gallery{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1 class="page-title">
+        <i class="fas fa-building"></i> Exhibitions
+    </h1>
+    <a href="{{ url_for('add_exhibition') }}" class="btn btn-primary">
+        <i class="fas fa-plus"></i> Add Exhibition
+    </a>
+</div>
+
+<div class="exhibition-grid">
+    {% if exhibitions %}
+        {% for exhibition in exhibitions %}
+        <div class="exhibition-card">
+            <div class="exhibition-header">
+                <h3>{{ exhibition.Name }}</h3>
+                <span class="badge badge-primary">ID: {{ exhibition.exhibition_id }}</span>
+            </div>
+            <div class="exhibition-body">
+                <p><i class="fas fa-lightbulb"></i> <strong>Theme:</strong> {{ exhibition.Theme or 'N/A' }}</p>
+                <p><i class="fas fa-calendar-alt"></i> <strong>Start:</strong> {{ exhibition.Start_date }}</p>
+                <p><i class="fas fa-calendar-check"></i> <strong>End:</strong> {{ exhibition.End_date }}</p>
+            </div>
+        </div>
+        {% endfor %}
+    {% else %}
+        <div class="no-data-large">
+            <i class="fas fa-building"></i>
+            <h3>No Exhibitions Found</h3>
+            <p>Create your first exhibition to get started</p>
+            <a href="{{ url_for('add_exhibition') }}" class="btn btn-primary">
+                <i class="fas fa-plus"></i> Add Exhibition
+            </a>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

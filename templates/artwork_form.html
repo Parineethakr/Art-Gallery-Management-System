@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+
+{% block title %}{% if artwork %}Edit{% else %}Add{% endif %} Artwork - Art Gallery{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1 class="page-title">
+        <i class="fas fa-image"></i> {% if artwork %}Edit{% else %}Add{% endif %} Artwork
+    </h1>
+    <a href="{{ url_for('artworks') }}" class="btn btn-secondary">
+        <i class="fas fa-arrow-left"></i> Back to Artworks
+    </a>
+</div>
+
+<div class="form-container">
+    <form method="POST" class="form">
+        {% if not artwork %}
+        <div class="form-group">
+            <label for="artwork_id">Artwork ID *</label>
+            <input type="number" id="artwork_id" name="artwork_id" required>
+        </div>
+        {% endif %}
+
+        <div class="form-group">
+            <label for="title">Title *</label>
+            <input type="text" id="title" name="title" value="{{ artwork.Title if artwork else '' }}" required>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group">
+                <label for="type">Type *</label>
+                <input type="text" id="type" name="type" value="{{ artwork.Type if artwork else '' }}" placeholder="e.g., Oil Painting, Sculpture" required>
+            </div>
+
+            <div class="form-group">
+                <label for="creation_yr">Creation Year *</label>
+                <input type="number" id="creation_yr" name="creation_yr" value="{{ artwork.creation_yr if artwork else '' }}" min="1000" max="2025" required>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group">
+                <label for="price">Price ($) *</label>
+                <input type="number" id="price" name="price" step="0.01" value="{{ artwork.price if artwork else '' }}" required>
+            </div>
+
+            <div class="form-group">
+                <label for="creator_id">Artist *</label>
+                <select id="creator_id" name="creator_id" required>
+                    <option value="">Select an artist</option>
+                    {% for artist in artists %}
+                        <option value="{{ artist.artist_id }}" {% if artwork and artwork.creator_id == artist.artist_id %}selected{% endif %}>
+                            {{ artist.Name }}
+                        </option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary">
+                <i class="fas fa-save"></i> {% if artwork %}Update{% else %}Add{% endif %} Artwork
+            </button>
+            <a href="{{ url_for('artworks') }}" class="btn btn-secondary">
+                <i class="fas fa-times"></i> Cancel
+            </a>
+        </div>
+    </form>
+</div>
+{% endblock %}

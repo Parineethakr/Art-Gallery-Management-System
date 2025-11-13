@@ -1,0 +1,103 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard - Art Gallery{% endblock %}
+
+{% block content %}
+<div class="dashboard">
+    <h1 class="page-title">
+        <i class="fas fa-tachometer-alt"></i> Dashboard
+    </h1>
+
+    <div class="stats-grid">
+        <div class="stat-card">
+            <div class="stat-icon" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                <i class="fas fa-image"></i>
+            </div>
+            <div class="stat-content">
+                <h3>{{ stats.total_artworks or 0 }}</h3>
+                <p>Total Artworks</p>
+            </div>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-icon" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+                <i class="fas fa-user-tie"></i>
+            </div>
+            <div class="stat-content">
+                <h3>{{ stats.total_artists or 0 }}</h3>
+                <p>Artists</p>
+            </div>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-icon" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
+                <i class="fas fa-gavel"></i>
+            </div>
+            <div class="stat-content">
+                <h3>{{ stats.total_auctions or 0 }}</h3>
+                <p>Auctions</p>
+            </div>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-icon" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);">
+                <i class="fas fa-users"></i>
+            </div>
+            <div class="stat-content">
+                <h3>{{ stats.total_buyers or 0 }}</h3>
+                <p>Buyers</p>
+            </div>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-icon" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);">
+                <i class="fas fa-eye"></i>
+            </div>
+            <div class="stat-content">
+                <h3>{{ stats.total_visitors or 0 }}</h3>
+                <p>Visitors</p>
+            </div>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-icon" style="background: linear-gradient(135deg, #30cfd0 0%, #330867 100%);">
+                <i class="fas fa-building"></i>
+            </div>
+            <div class="stat-content">
+                <h3>{{ stats.total_exhibitions or 0 }}</h3>
+                <p>Exhibitions</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="quick-actions">
+        <h2><i class="fas fa-bolt"></i> Quick Actions</h2>
+        <div class="action-grid">
+            <a href="{{ url_for('add_artwork') }}" class="action-btn">
+                <i class="fas fa-plus-circle"></i>
+                <span>Add Artwork</span>
+            </a>
+            <a href="{{ url_for('add_artist') }}" class="action-btn">
+                <i class="fas fa-user-plus"></i>
+                <span>Add Artist</span>
+            </a>
+            <a href="{{ url_for('add_auction') }}" class="action-btn">
+                <i class="fas fa-gavel"></i>
+                <span>Create Auction</span>
+            </a>
+            <a href="{{ url_for('add_buyer') }}" class="action-btn">
+                <i class="fas fa-user-plus"></i>
+                <span>Add Buyer</span>
+            </a>
+            <a href="{{ url_for('add_exhibition') }}" class="action-btn">
+                <i class="fas fa-calendar-plus"></i>
+                <span>Add Exhibition</span>
+            </a>
+            <a href="{{ url_for('reports') }}" class="action-btn">
+                <i class="fas fa-chart-line"></i>
+                <span>View Reports</span>
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block title %}{% if artist %}Edit{% else %}Add{% endif %} Artist - Art Gallery{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1 class="page-title">
+        <i class="fas fa-user-tie"></i> {% if artist %}Edit{% else %}Add{% endif %} Artist
+    </h1>
+    <a href="{{ url_for('artists') }}" class="btn btn-secondary">
+        <i class="fas fa-arrow-left"></i> Back to Artists
+    </a>
+</div>
+
+<div class="form-container">
+    <form method="POST" class="form">
+        {% if not artist %}
+        <div class="form-group">
+            <label for="artist_id">Artist ID *</label>
+            <input type="number" id="artist_id" name="artist_id" required>
+        </div>
+        {% endif %}
+
+        <div class="form-group">
+            <label for="name">Name *</label>
+            <input type="text" id="name" name="name" value="{{ artist.Name if artist else '' }}" required>
+        </div>
+
+        <div class="form-group">
+            <label for="bio">Biography</label>
+            <textarea id="bio" name="bio" rows="5">{{ artist.Bio if artist else '' }}</textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="contact">Contact Information</label>
+            <input type="text" id="contact" name="contact" value="{{ artist.Contact_info if artist else '' }}">
+        </div>
+
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary">
+                <i class="fas fa-save"></i> {% if artist %}Update{% else %}Add{% endif %} Artist
+            </button>
+            <a href="{{ url_for('artists') }}" class="btn btn-secondary">
+                <i class="fas fa-times"></i> Cancel
+            </a>
+        </div>
+    </form>
+</div>
+{% endblock %}

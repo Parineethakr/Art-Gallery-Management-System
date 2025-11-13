@@ -1,6 +1,6 @@
 # SQL Queries for DBMS Report
 
-This document contains all the SQL queries used in the Art Gallery Management System, organized by category for your project report.
+This document contains all the SQL queries used in the Art Gallery Management System, organized by category.
 
 ## 1. DDL Commands (Data Definition Language)
 
@@ -644,11 +644,3 @@ This document contains:
 - ✅ Triggers (Validation and automation)
 - ✅ Report Queries (Analytics)
 - ✅ Python Integration Examples
-
-Use these queries in your:
-1. Project report
-2. Live demonstration
-3. Viva preparation
-4. .sql file submission
-
-All queries are tested and working with your database!

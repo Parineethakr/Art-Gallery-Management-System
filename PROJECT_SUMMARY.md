@@ -107,22 +107,6 @@ art-gallery-app/
 - **Stored Procedures**: Encapsulated business logic
 - **Views**: Pre-computed complex queries
 
-## 🎓 Academic Integration
-
-### Aligns with Course Outcomes:
-- Database design and normalization
-- SQL query optimization
-- Transaction management
-- Application development
-- Full-stack integration
-
-### Learning Demonstrated:
-- ER modeling → Relational schema
-- DDL/DML mastery
-- Stored procedures and triggers
-- View creation
-- Application-database integration
-
 ## 🔧 Troubleshooting
 
 ### Common Issues:
@@ -145,4 +129,5 @@ SHOW PROCEDURE STATUS WHERE Db = 'artgal';
 # Test if views exist
 SHOW FULL TABLES WHERE Table_Type = 'VIEW';
 ```
+
 

@@ -252,13 +252,6 @@ curl http://localhost:5000/api/artworks
 
 This project is for educational purposes as part of DBMS Mini Project (UE23CS351A).
 
-## Contributors
 
-[]
 
-## Acknowledgments
-
-- PESU Faculty for project guidance
-
-- Flask and MySQL communities for excellent documentation
 

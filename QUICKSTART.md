@@ -1,6 +1,5 @@
 # Quick Start Guide - Art Gallery Management System
 
-## 🚀 Getting Started in 5 Minutes
 
 ### 1. Import Database (1 minute)
 ```bash
@@ -52,15 +51,6 @@ Go to: http://localhost:5000
 1. Go to Reports page
 2. Verify data shows in all sections
 
-## 📸 Taking Screenshots
-
-For your project report, capture:
-1. Dashboard (home page)
-2. Each CRUD operation (Add, Edit, Delete)
-3. Auction bidding process
-4. Reports page
-5. Database views in MySQL Workbench
-
 ## 🛠️ Common Commands
 
 ### View all buyers:
@@ -90,30 +80,6 @@ CALL place_bid(1, 1, 1, 55000.00);
 - **3 Auctions**: New York, London, Paris
 - **3 Buyers**: Sample buyers for testing
 
-## 💡 Tips
-
-1. **Start with Dashboard** - Get overview of system
-2. **Add Data Sequentially** - Artists → Artworks → Auctions → Bids
-3. **Use Search** - Every listing page has search functionality
-4. **Check Validations** - Try placing low bids to see error handling
-5. **Explore Reports** - See how views aggregate data
-
-## 🎓 For Your Report
-
-### Essential Screenshots:
-1. ER Diagram (create from schema)
-2. All CRUD operations
-3. Bidding process (3-4 screenshots)
-4. Reports with data
-5. Database schema in MySQL
-
-### Code to Include:
-1. CREATE TABLE statements
-2. View definitions
-3. Stored procedure code
-4. Sample INSERT statements
-5. Complex SELECT queries
-
 ## 🐛 Quick Fixes
 
 **Can't connect to database?**
@@ -127,7 +93,7 @@ CALL place_bid(1, 1, 1, 55000.00);
 **No data showing?**
 - Re-import: `mysql -u root -p artgal < Dump20251017.sql`
 
-## 📞 Need Help?
+## Need Help?
 
 1. Check README.md for detailed documentation
 2. Review error messages in terminal
@@ -144,4 +110,3 @@ Once setup is complete:
 4. ✅ Take screenshots
 5. ✅ Document your work
 
-Good luck with your project! 🎨

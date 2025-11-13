@@ -107,24 +107,6 @@ art-gallery-app/
 - **Stored Procedures**: Encapsulated business logic
 - **Views**: Pre-computed complex queries
 
-## 📱 Features Demonstration
-
-### For Live Demo:
-1. **Start**: Show dashboard with statistics
-2. **Add Data**: Create new artist → artwork → auction
-3. **Bidding**: Place multiple bids, show validation
-4. **Finalize**: Finalize auction, show winner
-5. **Reports**: Display analytics and insights
-6. **Search**: Filter data in real-time
-7. **Responsive**: Show mobile view
-
-### Key Points to Highlight:
-- Stored procedure validation (try low bid)
-- View aggregation (statistics update)
-- Foreign key constraints (try invalid artist_id)
-- Transaction handling (bid placement)
-- Real-time updates (dashboard counts)
-
 ## 🎓 Academic Integration
 
 ### Aligns with Course Outcomes:
@@ -140,17 +122,6 @@ art-gallery-app/
 - Stored procedures and triggers
 - View creation
 - Application-database integration
-
-## 📈 Possible Enhancements (Optional)
-
-If you want to exceed expectations:
-1. Add user authentication and roles
-2. Implement image upload for artworks
-3. Add email notifications for bid winners
-4. Create data visualization charts
-5. Add export to PDF functionality
-6. Implement advanced search filters
-7. Add payment gateway integration
 
 ## 🔧 Troubleshooting
 
@@ -174,3 +145,4 @@ SHOW PROCEDURE STATUS WHERE Db = 'artgal';
 # Test if views exist
 SHOW FULL TABLES WHERE Table_Type = 'VIEW';
 ```
+
